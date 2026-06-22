@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.T.M Enterprise – จำหน่ายปั๊มลมสกรู อะไหล่ และบริการซ่อมบำรุง</title>
+<meta name="description" content="B.T.M Enterprise จำหน่ายปั๊มลมสกรู อะไหล่ บริการ PM และซ่อมปั๊มลมสกรูครบวงจร เน้นคุณภาพและความไว้วางใจ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.460.0"></script>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'IBM Plex Sans Thai', 'IBM Plex Sans', 'Sukhumvit Set', sans-serif;
+  background: #0A2E1A;
+  color: #E8F7EE;
+  font-size: 16px;
+  line-height: 1.8;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+
+/* ===== COLOR VARS ===== */
+:root {
+  --c-base:    #0A2E1A;
+  --c-mid:     #1A5C34;
+  --c-hi:      #3D9E6B;
+  --c-tint:    #A8DFC0;
+  --c-light:   #E8F7EE;
+  --c-gold:    #C9A84C;
+  --c-gold-lt: #E8C97A;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'IBM Plex Sans Thai', 'IBM Plex Sans', sans-serif;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3 {
+  font-family: var(--serif);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+h1 { font-size: clamp(2.4rem, 6vw, 4.8rem); font-weight: 700; }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 600; }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 600; }
+p { font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.9; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 2rem;
+  background: transparent;
+  transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
+}
+.navbar.scrolled {
+  background: rgba(10,46,26,0.96);
+  backdrop-filter: blur(8px);
+  padding: 0.7rem 2rem;
+  border-bottom: 1px solid rgba(168,223,192,0.1);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--c-light);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.nav-logo span { color: var(--c-gold); }
+.nav-links {
+  display: none;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--c-tint);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--c-gold); }
+.nav-right {
+  display: flex; align-items: center; gap: 1rem;
+}
+.lang-sw {
+  display: flex; align-items: center; gap: 0.35rem;
+  font-size: 0.78rem; color: var(--c-tint);
+  font-weight: 500; letter-spacing: 0.04em;
+  border: 1px solid rgba(168,223,192,0.35);
+  padding: 0.3rem 0.6rem; border-radius: 4px;
+  transition: color 0.2s, border-color 0.2s;
+  background: transparent;
+}
+.lang-sw:hover { color: var(--c-gold); border-color: var(--c-gold); }
+.lang-sw svg { flex-shrink: 0; }
+.hamburger {
+  display: flex; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--c-light); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,46,26,0.98);
+  z-index: 99;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a {
+  font-family: var(--serif);
+  font-size: 1.6rem; font-weight: 600;
+  color: var(--c-light); text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--c-gold); }
+
+/* Desktop nav links visible */
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+  .hamburger { display: none; }
+}
+
+/* ===== STICKY SIDEBAR NAV (desktop only) ===== */
+.sidebar-nav {
+  display: none;
+  position: fixed;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.sidebar-nav a {
+  display: flex; align-items: flex-start;
+  flex-direction: column;
+  text-decoration: none;
+  opacity: 0.45;
+  transition: opacity 0.3s;
+  line-height: 1.2;
+}
+.sidebar-nav a:hover, .sidebar-nav a.active { opacity: 1; }
+.sidebar-nav a .s-th {
+  font-size: 0.65rem; color: var(--c-tint);
+  font-weight: 500; font-family: var(--sans);
+}
+.sidebar-nav a .s-en {
+  font-size: 0.55rem; color: var(--c-hi);
+  font-weight: 400; font-family: 'IBM Plex Sans', sans-serif;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.sidebar-nav a::before {
+  content: ''; display: block;
+  width: 2px; height: 0;
+  background: var(--c-gold);
+  margin-bottom: 4px;
+  transition: height 0.3s;
+}
+.sidebar-nav a.active::before { height: 20px; }
+@media (min-width: 1100px) { .sidebar-nav { display: flex; } }
+
+/* ===== SECTIONS ===== */
+section { position: relative; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+  background: var(--c-base);
+  padding: 7rem 1.5rem 4rem;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1716191300020-b52dec5b70a8?w=1400&h=900&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: 0.18;
+  transform: scale(1.08);
+  animation: heroZoom 12s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.0); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(10,46,26,0.92) 0%, rgba(26,92,52,0.55) 60%, rgba(10,46,26,0.88) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--c-gold);
+  border-top: 1px solid var(--c-gold);
+  padding-top: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.hero h1 {
+  color: var(--c-light);
+  margin-bottom: 1.2rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--c-gold-lt);
+}
+.hero-lead {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--c-tint);
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  line-height: 1.9;
+}
+.hero-cta-row {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--c-gold);
+  color: var(--c-base);
+  padding: 0.85em 2em;
+  border-radius: 3px;
+  font-weight: 700; font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  min-height: 44px;
+  letter-spacing: 0.04em;
+}
+.btn-primary:hover {
+  background: var(--c-gold-lt);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+}
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1.5px solid rgba(168,223,192,0.5);
+  color: var(--c-tint);
+  padding: 0.85em 2em;
+  border-radius: 3px;
+  font-weight: 500; font-size: 0.9rem;
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+  min-height: 44px;
+}
+.btn-outline:hover {
+  border-color: var(--c-tint);
+  color: var(--c-light);
+  transform: translateY(-2px);
+}
+.hero-scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  opacity: 0.5;
+  animation: bounce 2s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+.hero-scroll-indicator span {
+  font-size: 0.62rem; letter-spacing: 0.15em;
+  color: var(--c-tint); text-transform: uppercase;
+}
+
+/* Clip-path divider */
+.clip-down { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+.clip-up   { clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%); padding-bottom: 5vw; }
+
+/* ===== ABOUT / PULL-QUOTE ===== */
+.about {
+  background: #0e3820;
+  padding: 6rem 1.5rem;
+}
+.about-inner {
+  max-width: 860px; margin: 0 auto;
+}
+.section-label {
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--c-gold); font-weight: 600;
+  margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::after {
+  content: ''; flex: 1; max-width: 60px;
+  height: 1px; background: var(--c-gold); opacity: 0.5;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+.about-text h2 {
+  color: var(--c-light);
+  margin-bottom: 1.5rem;
+}
+.about-text p {
+  color: var(--c-tint);
+  margin-bottom: 1rem;
+}
+.about-img-wrap {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.about-img-wrap::before {
+  content: '';
+  position: absolute; inset: -2px;
+  background: linear-gradient(135deg, var(--c-gold) 0%, transparent 60%);
+  z-index: 0; border-radius: 4px;
+}
+.about-img-wrap img {
+  position: relative; z-index: 1;
+  width: 100%; display: block;
+  border-radius: 3px;
+  transition: transform 0.5s ease;
+}
+.about-img-wrap:hover img { transform: scale(1.03); }
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+/* ===== PULL QUOTE ===== */
+.pullquote {
+  background: var(--c-mid);
+  padding: 5rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+.pullquote blockquote {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-style: italic;
+  color: var(--c-light);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+.pullquote blockquote::before {
+  content: '\201C';
+  font-size: 8rem;
+  color: rgba(201,168,76,0.15);
+  font-family: var(--serif);
+  position: absolute;
+  top: -2.5rem; left: -1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.pullquote cite {
+  display: block; margin-top: 1.5rem;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  color: var(--c-gold); font-style: normal;
+  text-transform: uppercase; font-weight: 600;
+}
+
+/* ===== STATS ===== */
+.stats {
+  background: var(--c-base);
+  padding: 5rem 0;
+  overflow: hidden;
+}
+.stats-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+}
+.stats-label { padding: 0 1.5rem; max-width: 1100px; margin: 0 auto 2rem; }
+.stats-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stat-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 2.5rem 1.5rem;
+  border-bottom: 1px solid rgba(168,223,192,0.1);
+  gap: 2rem;
+  position: relative;
+  overflow: visible;
+  transition: background 0.3s;
+}
+.stat-item:hover { background: rgba(26,92,52,0.3); }
+.stat-numeral {
+  font-family: var(--serif);
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  font-weight: 900;
+  color: var(--c-gold);
+  line-height: 0.85;
+  opacity: 0.22;
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+.stat-body { position: relative; z-index: 1; }
+.stat-value {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: var(--c-gold);
+  line-height: 1.1;
+}
+.stat-value sup {
+  font-size: 0.45em; vertical-align: super;
+  color: var(--c-gold-lt);
+}
+.stat-desc {
+  font-size: 0.85rem; color: var(--c-tint);
+  margin-top: 0.4rem;
+  line-height: 1.7;
+}
+.stat-en {
+  font-size: 0.7rem; color: var(--c-hi);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+@media (min-width: 768px) {
+  .stats-track { flex-direction: row; }
+  .stat-item {
+    flex: 1; flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid rgba(168,223,192,0.1);
+    padding: 3rem 2.5rem;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-numeral { font-size: clamp(5rem, 8vw, 9rem); right: -1.5rem; }
+}
+
+/* ===== SERVICES ===== */
+.services {
+  background: #0c3320;
+  padding: 6rem 1.5rem;
+}
+.services-inner { max-width: 860px; margin: 0 auto; }
+.services-header { margin-bottom: 3rem; }
+.services-header h2 { color: var(--c-light); margin-bottom: 0.8rem; }
+.services-header p { color: var(--c-tint); max-width: 520px; }
+
+/* Accordion services */
+.service-accordion { display: flex; flex-direction: column; gap: 0; }
+.service-acc-item {
+  border-bottom: 1px solid rgba(168,223,192,0.15);
+  overflow: hidden;
+}
+.service-acc-header {
+  display: flex; align-items: center;
+  padding: 1.5rem 0;
+  cursor: pointer;
+  gap: 1.5rem;
+  transition: color 0.25s;
+  position: relative;
+  list-style: none;
+}
+.service-acc-header::-webkit-details-marker { display: none; }
+.service-acc-num {
+  font-family: var(--serif);
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--c-gold); opacity: 0.7;
+  min-width: 2rem;
+  letter-spacing: 0.06em;
+}
+.service-acc-title {
+  flex: 1;
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  font-weight: 600; color: var(--c-light);
+  line-height: 1.5;
+}
+.service-acc-icon {
+  color: var(--c-hi);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+details[open] .service-acc-icon { transform: rotate(45deg); }
+.service-acc-body {
+  padding: 0 0 2rem 3.5rem;
+  color: var(--c-tint);
+  line-height: 1.9;
+}
+.service-acc-body ul {
+  list-style: none;
+  margin-top: 1rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.service-acc-body li {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.9rem;
+}
+.service-acc-body li::before {
+  content: '—';
+  color: var(--c-gold);
+  margin-top: 0.05em;
+  flex-shrink: 0;
+}
+
+/* ===== PRODUCTS ===== */
+.products {
+  background: var(--c-base);
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+.products-inner { max-width: 960px; margin: 0 auto; }
+.products-header { margin-bottom: 4rem; }
+.products-header h2 { color: var(--c-light); }
+.product-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+.product-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.product-item.reverse { }
+.product-img-wrap {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+.product-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.product-img-wrap:hover img { transform: scale(1.05); }
+.product-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  background: var(--c-gold);
+  color: var(--c-base);
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.35em 0.8em;
+  border-radius: 2px;
+}
+.product-text h3 {
+  color: var(--c-light);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.product-text p { color: var(--c-tint); margin-bottom: 1.5rem; }
+.product-specs {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.product-spec {
+  font-size: 0.78rem;
+  color: var(--c-hi);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+@media (min-width: 768px) {
+  .product-item { grid-template-columns: 1fr 1fr; }
+  .product-item.reverse .product-img-wrap { order: 2; }
+  .product-item.reverse .product-text { order: 1; }
+}
+
+/* ===== PM SECTION ===== */
+.pm-section {
+  background: linear-gradient(160deg, #112b1e 0%, #0A2E1A 100%);
+  padding: 6rem 1.5rem;
+  overflow: hidden;
+}
+.pm-inner { max-width: 960px; margin: 0 auto; }
+.pm-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.pm-content h2 { color: var(--c-light); margin-bottom: 1.5rem; }
+.pm-content > p { color: var(--c-tint); margin-bottom: 2rem; }
+.pm-timeline {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative;
+}
+.pm-timeline::before {
+  content: '';
+  position: absolute; left: 1.1rem; top: 0; bottom: 0;
+  width: 1px; background: rgba(168,223,192,0.2);
+}
+.pm-step {
+  display: flex; gap: 1.5rem;
+  padding: 1.2rem 0 1.2rem 0;
+  position: relative;
+}
+.pm-step-num {
+  width: 2.2rem; height: 2.2rem;
+  border-radius: 50%;
+  background: var(--c-mid);
+  border: 2px solid var(--c-gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 0.75rem; font-weight: 700;
+  color: var(--c-gold);
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+}
+.pm-step-text h4 {
+  font-family: var(--serif); font-size: 1rem; font-weight: 600;
+  color: var(--c-light); margin-bottom: 0.2rem; line-height: 1.5;
+}
+.pm-step-text p { font-size: 0.85rem; color: var(--c-tint); }
+.pm-img {
+  border-radius: 8px; overflow: hidden;
+  aspect-ratio: 4/3;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  position: relative;
+}
+.pm-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pm-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, rgba(10,46,26,0.9) 0%, transparent 100%);
+  padding: 2rem 1.5rem 1.2rem;
+  font-size: 0.78rem; color: var(--c-tint);
+  font-style: italic;
+}
+@media (min-width: 768px) {
+  .pm-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== PULLQUOTE 2 ===== */
+.pullquote-2 {
+  background: #0A2E1A;
+  padding: 5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.pullquote-2::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://images.unsplash.com/photo-1501244686579-97d04b498199?w=1200&h=600&fit=crop') center/cover;
+  opacity: 0.06;
+}
+.pullquote-2 blockquote {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-style: italic;
+  color: var(--c-light);
+  line-height: 1.65;
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.pullquote-2 cite {
+  display: block; margin-top: 1.5rem;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  color: var(--c-gold); font-style: normal;
+  text-transform: uppercase; font-weight: 600;
+}
+
+/* ===== WHY BTM ===== */
+.why-btm {
+  background: #0e3820;
+  padding: 6rem 1.5rem;
+}
+.why-inner { max-width: 860px; margin: 0 auto; }
+.why-header { margin-bottom: 3.5rem; }
+.why-header h2 { color: var(--c-light); margin-bottom: 0.8rem; }
+.why-header p { color: var(--c-tint); }
+.why-list {
+  display: flex; flex-direction: column; gap: 2.5rem;
+}
+.why-item {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.why-item.visible { opacity: 1; transform: translateX(0); }
+.why-icon-wrap {
+  width: 3rem; height: 3rem; border-radius: 50%;
+  background: rgba(61,158,107,0.15);
+  border: 1px solid rgba(61,158,107,0.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
+}
+.why-item:hover .why-icon-wrap {
+  background: rgba(201,168,76,0.15);
+  border-color: rgba(201,168,76,0.4);
+}
+.why-icon-wrap svg { color: var(--c-hi); }
+.why-item:hover .why-icon-wrap svg { color: var(--c-gold); }
+.why-body h3 {
+  color: var(--c-light); font-size: 1.1rem;
+  margin-bottom: 0.4rem; line-height: 1.5;
+}
+.why-body p { color: var(--c-tint); font-size: 0.9rem; }
+
+/* ===== CONTACT ===== */
+.contact {
+  background: var(--c-base);
+  padding: 6rem 1.5rem;
+  clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+  padding-top: 8rem;
+}
+.contact-inner {
+  max-width: 860px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr;
+  gap: 4rem;
+}
+.contact-text h2 { color: var(--c-light); margin-bottom: 1.2rem; }
+.contact-text p { color: var(--c-tint); margin-bottom: 2rem; }
+.contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+.contact-info-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(26,92,52,0.3);
+  border: 1px solid rgba(168,223,192,0.1);
+  border-radius: 6px;
+  transition: border-color 0.25s, background 0.25s;
+}
+.contact-info-item:hover {
+  border-color: rgba(201,168,76,0.3);
+  background: rgba(26,92,52,0.45);
+}
+.contact-info-item svg { color: var(--c-gold); flex-shrink: 0; margin-top: 2px; }
+.contact-info-text .label {
+  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--c-hi); font-weight: 600; margin-bottom: 0.2rem;
+}
+.contact-info-text .value {
+  color: var(--c-light); font-size: 0.95rem;
+}
+.contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--c-hi); font-weight: 600;
+}
+.form-group input, .form-group textarea, .form-group select {
+  background: rgba(26,92,52,0.25);
+  border: 1px solid rgba(168,223,192,0.2);
+  border-radius: 4px;
+  color: var(--c-light);
+  padding: 0.85em 1em;
+  font-family: var(--sans); font-size: 0.95rem;
+  transition: border-color 0.25s;
+  min-height: 44px;
+  outline: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(168,223,192,0.4);
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--c-gold);
+}
+.form-group select option { background: #0A2E1A; }
+.form-group textarea { min-height: 110px; resize: vertical; }
+@media (min-width: 768px) {
+  .contact-inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #061c10;
+  padding: 3.5rem 1.5rem 2rem;
+  border-top: 1px solid rgba(168,223,192,0.08);
+}
+.footer-inner {
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+.footer-brand .logo-text {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+  color: var(--c-light);
+}
+.footer-brand .logo-text span { color: var(--c-gold); }
+.footer-brand p {
+  font-size: 0.85rem; color: var(--c-tint); margin-top: 0.8rem;
+  max-width: 240px; line-height: 1.8;
+}
+.footer-col h4 {
+  font-family: var(--serif); font-size: 0.85rem; font-weight: 700;
+  color: var(--c-gold); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-col ul li a {
+  font-size: 0.85rem; color: var(--c-tint); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: var(--c-light); }
+.footer-bottom {
+  max-width: 960px; margin: 2.5rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(168,223,192,0.08);
+  display: flex; flex-wrap: wrap; gap: 0.8rem;
+  justify-content: space-between; align-items: center;
+}
+.footer-bottom p { font-size: 0.75rem; color: rgba(168,223,192,0.4); }
+@media (min-width: 768px) {
+  .footer-inner { grid-template-columns: 1.5fr 1fr 1fr; }
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* stagger delays */
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+.d5 { transition-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">B<span>.</span>T<span>.</span>M<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a></li>
+    <li><a href="#services" data-lang-th="บริการ" data-lang-en="Services">บริการ</a></li>
+    <li><a href="#products" data-lang-th="สินค้า" data-lang-en="Products">สินค้า</a></li>
+    <li><a href="#pm" data-lang-th="บำรุงรักษา" data-lang-en="Maintenance">บำรุงรักษา</a></li>
+    <li><a href="#contact" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw" aria-label="Switch language">
+      <i data-lucide="globe" width="14" height="14"></i>
+      <span class="lang-sw__label">TH</span>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mob-link" data-lang-th="เกี่ยวกับเรา" data-lang-en="About">เกี่ยวกับเรา</a>
+  <a href="#services" class="mob-link" data-lang-th="บริการ" data-lang-en="Services">บริการ</a>
+  <a href="#products" class="mob-link" data-lang-th="สินค้า" data-lang-en="Products">สินค้า</a>
+  <a href="#pm" class="mob-link" data-lang-th="บำรุงรักษา" data-lang-en="Maintenance">บำรุงรักษา</a>
+  <a href="#contact" class="mob-link" data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</a>
+</div>
+
+<!-- SIDEBAR NAV -->
+<nav class="sidebar-nav" id="sidebarNav" aria-label="Section navigation">
+  <a href="#hero" data-section="hero">
+    <span class="s-th">หน้าหลัก</span>
+    <span class="s-en">Hero</span>
+  </a>
+  <a href="#about" data-section="about">
+    <span class="s-th">เกี่ยวกับเรา</span>
+    <span class="s-en">About</span>
+  </a>
+  <a href="#services" data-section="services">
+    <span class="s-th">บริการ</span>
+    <span class="s-en">Services</span>
+  </a>
+  <a href="#products" data-section="products">
+    <span class="s-th">สินค้า</span>
+    <span class="s-en">Products</span>
+  </a>
+  <a href="#pm" data-section="pm">
+    <span class="s-th">PM</span>
+    <span class="s-en">Maintenance</span>
+  </a>
+  <a href="#contact" data-section="contact">
+    <span class="s-th">ติดต่อ</span>
+    <span class="s-en">Contact</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow reveal" data-lang-th="ผู้เชี่ยวชาญปั๊มลมสกรูครบวงจร" data-lang-en="Total Screw Compressor Solutions">ผู้เชี่ยวชาญปั๊มลมสกรูครบวงจร</span>
+    <h1 class="reveal d1">
+      <span data-lang-th="พลังลม" data-lang-en="Compressed">พลังลม</span><br>
+      <em><span data-lang-th="ที่ไว้ใจได้" data-lang-en="Power You">ที่ไว้ใจได้</span></em><br>
+      <span data-lang-th="ทุกอุตสาหกรรม" data-lang-en="Can Trust">ทุกอุตสาหกรรม</span>
+    </h1>
+    <p class="hero-lead reveal d2" data-lang-th="B.T.M Enterprise จำหน่ายปั๊มลมสกรูคุณภาพสูง อะไหล่แท้ พร้อมทีมช่างผู้เชี่ยวชาญบริการ PM และซ่อมสกรูอย่างมืออาชีพ ด้วยประสบการณ์กว่า 15 ปีในวงการ" data-lang-en="B.T.M Enterprise supplies premium screw air compressors, genuine spare parts, and provides expert PM service and repairs with over 15 years of industry experience.">B.T.M Enterprise จำหน่ายปั๊มลมสกรูคุณภาพสูง อะไหล่แท้ พร้อมทีมช่างผู้เชี่ยวชาญบริการ PM และซ่อมสกรูอย่างมืออาชีพ ด้วยประสบการณ์กว่า 15 ปีในวงการ</p>
+    <div class="hero-cta-row reveal d3">
+      <a href="#contact" class="btn-primary">
+        <i data-lucide="phone-call" width="16" height="16"></i>
+        <span data-lang-th="ปรึกษาฟรี" data-lang-en="Free Consultation">ปรึกษาฟรี</span>
+      </a>
+      <a href="#products" class="btn-outline">
+        <span data-lang-th="ดูสินค้า" data-lang-en="View Products">ดูสินค้า</span>
+        <i data-lucide="arrow-right" width="16" height="16"></i>
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll-indicator">
+    <i data-lucide="chevrons-down" width="18" height="18" style="color:var(--c-tint)"></i>
+    <span data-lang-th="เลื่อนดูข้อมูล" data-lang-en="Scroll">เลื่อนดูข้อมูล</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="section-label reveal" data-lang-th="เกี่ยวกับ B.T.M Enterprise" data-lang-en="About B.T.M Enterprise">เกี่ยวกับ B.T.M Enterprise</div>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <h2 data-lang-th="รากฐานที่มั่นคง บนความไว้วางใจ" data-lang-en="Built on Trust, Proven by Time">รากฐานที่มั่นคง บนความไว้วางใจ</h2>
+        <p data-lang-th="B.T.M Enterprise ก่อตั้งขึ้นด้วยปณิธานที่จะเป็นหุ้นส่วนที่เชื่อถือได้ของโรงงานอุตสาหกรรมทั่วประเทศไทย เรานำเข้าและจำหน่ายปั๊มลมสกรูระดับพรีเมียม พร้อมอะไหล่แท้จากผู้ผลิตชั้นนำของโลก" data-lang-en="B.T.M Enterprise was founded with a single commitment: to be the most reliable partner for industrial facilities across Thailand. We source and supply premium screw compressors with genuine parts from the world's leading manufacturers.">B.T.M Enterprise ก่อตั้งขึ้นด้วยปณิธานที่จะเป็นหุ้นส่วนที่เชื่อถือได้ของโรงงานอุตสาหกรรมทั่วประเทศไทย เรานำเข้าและจำหน่ายปั๊มลมสกรูระดับพรีเมียม พร้อมอะไหล่แท้จากผู้ผลิตชั้นนำของโลก</p>
+        <p data-lang-th="ทีมวิศวกรและช่างเทคนิคของเราพร้อมให้บริการทั้งการติดตั้ง บำรุงรักษาเชิงป้องกัน (PM) และซ่อมแซมปั๊มลมสกรูทุกยี่ห้อ ทุกรุ่น ด้วยมาตรฐานระดับโรงงาน" data-lang-en="Our team of engineers and technicians provides installation, preventive maintenance (PM), and full repair services for all screw compressor brands and models — to factory-standard quality.">ทีมวิศวกรและช่างเทคนิคของเราพร้อมให้บริการทั้งการติดตั้ง บำรุงรักษาเชิงป้องกัน (PM) และซ่อมแซมปั๊มลมสกรูทุกยี่ห้อ ทุกรุ่น ด้วยมาตรฐานระดับโรงงาน</p>
+      </div>
+      <div class="about-img-wrap reveal-right">
+        <img src="https://images.unsplash.com/photo-1637296001293-43ec1ac4e5ed?w=600&h=500&fit=crop" alt="Screw air compressor unit" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pullquote">
+  <blockquote>
+    <span data-lang-th="&ldquo;เครื่องจักรหยุด ธุรกิจหยุด&nbsp;&mdash;&nbsp;เราจึงไม่หยุดดูแลคุณ&rdquo;" data-lang-en="&ldquo;When machines stop, business stops&nbsp;&mdash;&nbsp;which is why we never stop caring for yours.&rdquo;">&ldquo;เครื่องจักรหยุด ธุรกิจหยุด&nbsp;&mdash;&nbsp;เราจึงไม่หยุดดูแลคุณ&rdquo;</span>
+    <cite data-lang-th="B.T.M Enterprise — คำมั่นสัญญาของเรา" data-lang-en="B.T.M Enterprise — Our Promise">B.T.M Enterprise — คำมั่นสัญญาของเรา</cite>
+  </blockquote>
+</div>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="stats-label section-label reveal" data-lang-th="ตัวเลขที่บอกเล่าประสบการณ์" data-lang-en="Numbers That Speak">ตัวเลขที่บอกเล่าประสบการณ์</div>
+  <div class="stats-inner">
+    <div class="stats-track">
+      <div class="stat-item reveal d1">
+        <div class="stat-body">
+          <div class="stat-value">15<sup data-lang-th="+ ปี" data-lang-en="+ yrs">+ ปี</sup></div>
+          <div class="stat-desc" data-lang-th="ประสบการณ์ในอุตสาหกรรมปั๊มลม" data-lang-en="Industry experience in compressor services">ประสบการณ์ในอุตสาหกรรมปั๊มลม</div>
+          <div class="stat-en">Years</div>
+        </div>
+        <div class="stat-numeral" aria-hidden="true">15</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-body">
+          <div class="stat-value">500<sup data-lang-th="+ ราย" data-lang-en="+ clients">+ ราย</sup></div>
+          <div class="stat-desc" data-lang-th="ลูกค้าโรงงานอุตสาหกรรมที่ไว้วางใจเรา" data-lang-en="Industrial clients who trust our services">ลูกค้าโรงงานอุตสาหกรรมที่ไว้วางใจเรา</div>
+          <div class="stat-en">Clients</div>
+        </div>
+        <div class="stat-numeral" aria-hidden="true">500</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-body">
+          <div class="stat-value">24<sup data-lang-th="/7" data-lang-en="/7">/7</sup></div>
+          <div class="stat-desc" data-lang-th="บริการฉุกเฉินตลอด 24 ชั่วโมง ทุกวัน" data-lang-en="Emergency service available around the clock">บริการฉุกเฉินตลอด 24 ชั่วโมง ทุกวัน</div>
+          <div class="stat-en">Support</div>
+        </div>
+        <div class="stat-numeral" aria-hidden="true">24</div>
+      </div>
+      <div class="stat-item reveal d4">
+        <div class="stat-body">
+          <div class="stat-value">&lt;4<sup data-lang-th=" ชม." data-lang-en=" hrs"> ชม.</sup></div>
+          <div class="stat-desc" data-lang-th="เวลาตอบสนองเฉลี่ยสำหรับงานฉุกเฉิน" data-lang-en="Average emergency response time">เวลาตอบสนองเฉลี่ยสำหรับงานฉุกเฉิน</div>
+          <div class="stat-en">Response</div>
+        </div>
+        <div class="stat-numeral" aria-hidden="true">&lt;4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <div class="section-label reveal" data-lang-th="สิ่งที่เราทำได้" data-lang-en="What We Do">สิ่งที่เราทำได้</div>
+      <h2 class="reveal d1" data-lang-th="บริการครบวงจร สำหรับปั๊มลมสกรู" data-lang-en="Complete Screw Compressor Services">บริการครบวงจร สำหรับปั๊มลมสกรู</h2>
+      <p class="reveal d2" data-lang-th="ตั้งแต่การขายสินค้าจนถึงการดูแลหลังการขาย เราคือพาร์ทเนอร์ที่คุณพึ่งพาได้" data-lang-en="From sales to after-sales care, we are the partner you can count on.">ตั้งแต่การขายสินค้าจนถึงการดูแลหลังการขาย เราคือพาร์ทเนอร์ที่คุณพึ่งพาได้</p>
+    </div>
+    <div class="service-accordion reveal d2">
+      <details open>
+        <summary class="service-acc-header">
+          <span class="service-acc-num">01</span>
+          <span class="service-acc-title" data-lang-th="จำหน่ายปั๊มลมสกรู" data-lang-en="Screw Compressor Sales">จำหน่ายปั๊มลมสกรู</span>
+          <span class="service-acc-icon"><i data-lucide="plus" width="20" height="20"></i></span>
+        </summary>
+        <div class="service-acc-body">
+          <p data-lang-th="จำหน่ายปั๊มลมสกรูชนิด Oil-Injected และ Oil-Free หลากหลายขนาด ตั้งแต่ 5 HP ถึง 250 HP รองรับทุกการใช้งานอุตสาหกรรม" data-lang-en="We supply oil-injected and oil-free screw compressors in sizes from 5 HP to 250 HP, covering all industrial applications.">จำหน่ายปั๊มลมสกรูชนิด Oil-Injected และ Oil-Free หลากหลายขนาด ตั้งแต่ 5 HP ถึง 250 HP รองรับทุกการใช้งานอุตสาหกรรม</p>
+          <ul>
+            <li><span data-lang-th="ปั๊มลมสกรู Fixed Speed &amp; VSD" data-lang-en="Fixed Speed &amp; VSD screw compressors">ปั๊มลมสกรู Fixed Speed &amp; VSD</span></li>
+            <li><span data-lang-th="ระบบอบแห้งลม (Air Dryer) ทุกประเภท" data-lang-en="Air dryer systems of all types">ระบบอบแห้งลม (Air Dryer) ทุกประเภท</span></li>
+            <li><span data-lang-th="ถังเก็บลม ระบบกรอง และอุปกรณ์เสริม" data-lang-en="Air receivers, filtration systems, and accessories">ถังเก็บลม ระบบกรอง และอุปกรณ์เสริม</span></li>
+            <li><span data-lang-th="บริการออกแบบระบบลมอัดสำหรับโรงงาน" data-lang-en="Compressed air system design for factories">บริการออกแบบระบบลมอัดสำหรับโรงงาน</span></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary class="service-acc-header">
+          <span class="service-acc-num">02</span>
+          <span class="service-acc-title" data-lang-th="จำหน่ายอะไหล่แท้" data-lang-en="Genuine Spare Parts">จำหน่ายอะไหล่แท้</span>
+          <span class="service-acc-icon"><i data-lucide="plus" width="20" height="20"></i></span>
+        </summary>
+        <div class="service-acc-body">
+          <p data-lang-th="อะไหล่แท้จากผู้ผลิตโดยตรง รับประกันคุณภาพ มีสต็อกพร้อมจัดส่งทันที สำหรับทุกยี่ห้อชั้นนำ" data-lang-en="Genuine parts direct from manufacturers, quality guaranteed, stocked for immediate dispatch for all leading brands.">อะไหล่แท้จากผู้ผลิตโดยตรง รับประกันคุณภาพ มีสต็อกพร้อมจัดส่งทันที สำหรับทุกยี่ห้อชั้นนำ</p>
+          <ul>
+            <li><span data-lang-th="ไส้กรองน้ำมัน / ไส้กรองอากาศ / ไส้กรอง Separator" data-lang-en="Oil filters / Air filters / Separator elements">ไส้กรองน้ำมัน / ไส้กรองอากาศ / ไส้กรอง Separator</span></li>
+            <li><span data-lang-th="น้ำมันสำหรับปั๊มลมสกรูโดยเฉพาะ" data-lang-en="Specialist screw compressor lubricants">น้ำมันสำหรับปั๊มลมสกรูโดยเฉพาะ</span></li>
+            <li><span data-lang-th="ชุด Overhaul Kit, Bearing, Seal และชิ้นส่วนภายใน" data-lang-en="Overhaul kits, bearings, seals, and internals">ชุด Overhaul Kit, Bearing, Seal และชิ้นส่วนภายใน</span></li>
+            <li><span data-lang-th="Board ควบคุม, Solenoid Valve, Pressure Gauge" data-lang-en="Control boards, solenoid valves, pressure gauges">Board ควบคุม, Solenoid Valve, Pressure Gauge</span></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary class="service-acc-header">
+          <span class="service-acc-num">03</span>
+          <span class="service-acc-title" data-lang-th="บริการ PM (Preventive Maintenance)" data-lang-en="Preventive Maintenance (PM)">บริการ PM (Preventive Maintenance)</span>
+          <span class="service-acc-icon"><i data-lucide="plus" width="20" height="20"></i></span>
+        </summary>
+        <div class="service-acc-body">
+          <p data-lang-th="โปรแกรมบำรุงรักษาเชิงป้องกันที่ออกแบบมาเพื่อยืดอายุการใช้งานของปั๊มลม และลดความเสี่ยงของการขัดข้องที่ไม่คาดคิด" data-lang-en="A preventive maintenance program designed to extend compressor lifespan and minimize the risk of unexpected breakdowns.">โปรแกรมบำรุงรักษาเชิงป้องกันที่ออกแบบมาเพื่อยืดอายุการใช้งานของปั๊มลม และลดความเสี่ยงของการขัดข้องที่ไม่คาดคิด</p>
+          <ul>
+            <li><span data-lang-th="แผน PM รายเดือน รายไตรมาส และรายปี" data-lang-en="Monthly, quarterly, and annual PM plans">แผน PM รายเดือน รายไตรมาส และรายปี</span></li>
+            <li><span data-lang-th="รายงานสภาพเครื่องพร้อมคำแนะนำหลัง PM ทุกครั้ง" data-lang-en="Machine condition report with recommendations after each PM">รายงานสภาพเครื่องพร้อมคำแนะนำหลัง PM ทุกครั้ง</span></li>
+            <li><span data-lang-th="ทีมช่างที่ได้รับการรับรองจากผู้ผลิต" data-lang-en="Manufacturer-certified technician team">ทีมช่างที่ได้รับการรับรองจากผู้ผลิต</span></li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary class="service-acc-header">
+          <span class="service-acc-num">04</span>
+          <span class="service-acc-title" data-lang-th="ซ่อมปั๊มลมสกรู" data-lang-en="Screw Compressor Repair">ซ่อมปั๊มลมสกรู</span>
+          <span class="service-acc-icon"><i data-lucide="plus" width="20" height="20"></i></span>
+        </summary>
+        <div class="service-acc-body">
+          <p data-lang-th="บริการซ่อมแซมปั๊มลมสกรูทุกยี่ห้อ ทุกอาการ ทั้งงาน On-site และที่ศูนย์ซ่อมของเรา พร้อมรับประกันผลงาน" data-lang-en="Repair services for all screw compressor brands and fault types, both on-site and at our workshop, with workmanship warranty.">บริการซ่อมแซมปั๊มลมสกรูทุกยี่ห้อ ทุกอาการ ทั้งงาน On-site และที่ศูนย์ซ่อมของเรา พร้อมรับประกันผลงาน</p>
+          <ul>
+            <li><span data-lang-th="วินิจฉัยอาการ ออกใบเสนอราคาโปร่งใส" data-lang-en="Accurate diagnosis with transparent quotation">วินิจฉัยอาการ ออกใบเสนอราคาโปร่งใส</span></li>
+            <li><span data-lang-th="Overhaul ปั๊มสกรู (Airend Rebuild)" data-lang-en="Complete airend overhaul and rebuild">Overhaul ปั๊มสกรู (Airend Rebuild)</span></li>
+            <li><span data-lang-th="ซ่อม/เปลี่ยน Board ควบคุม ระบบไฟฟ้า" data-lang-en="Control board and electrical system repair/replacement">ซ่อม/เปลี่ยน Board ควบคุม ระบบไฟฟ้า</span></li>
+            <li><span data-lang-th="บริการฉุกเฉิน 24/7 สำหรับลูกค้าสัญญา" data-lang-en="24/7 emergency service for contract clients">บริการฉุกเฉิน 24/7 สำหรับลูกค้าสัญญา</span></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <div class="products-header">
+      <div class="section-label reveal" data-lang-th="ผลิตภัณฑ์ของเรา" data-lang-en="Our Products">ผลิตภัณฑ์ของเรา</div>
+      <h2 class="reveal d1" data-lang-th="ปั๊มลมสกรู คุณภาพระดับอุตสาหกรรม" data-lang-en="Industrial-Grade Screw Compressors">ปั๊มลมสกรู คุณภาพระดับอุตสาหกรรม</h2>
+    </div>
+    <div class="product-row">
+      <div class="product-item reveal">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1725916631310-4d7cdf815079?w=700&h=450&fit=crop" alt="Industrial screw compressor engine" loading="lazy">
+          <span class="product-badge" data-lang-th="ขายดี" data-lang-en="Best Seller">ขายดี</span>
+        </div>
+        <div class="product-text">
+          <h3 data-lang-th="ปั๊มลมสกรู Fixed Speed Series" data-lang-en="Fixed Speed Screw Compressor Series">ปั๊มลมสกรู Fixed Speed Series</h3>
+          <p data-lang-th="เหมาะสำหรับการใช้งานที่ต้องการลมอัดต่อเนื่องและสม่ำเสมอ ประสิทธิภาพสูง บำรุงรักษาง่าย เหมาะกับโรงงานทุกขนาด" data-lang-en="Ideal for applications requiring continuous, steady compressed air. High efficiency, easy maintenance — suitable for factories of all sizes.">เหมาะสำหรับการใช้งานที่ต้องการลมอัดต่อเนื่องและสม่ำเสมอ ประสิทธิภาพสูง บำรุงรักษาง่าย เหมาะกับโรงงานทุกขนาด</p>
+          <div class="product-specs">
+            <span class="product-spec"><i data-lucide="zap" width="13" height="13"></i> 5 – 100 HP</span>
+            <span class="product-spec"><i data-lucide="gauge" width="13" height="13"></i> 7 – 13 bar</span>
+            <span class="product-spec"><i data-lucide="wind" width="13" height="13"></i> Oil-Injected</span>
+          </div>
+          <a href="#contact" class="btn-primary" style="font-size:0.82rem; padding: 0.75em 1.5em;">
+            <span data-lang-th="สอบถามราคา" data-lang-en="Get a Quote">สอบถามราคา</span>
+            <i data-lucide="arrow-right" width="14" height="14"></i>
+          </a>
+        </div>
+      </div>
+      <div class="product-item reverse reveal">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1694532443712-748f111fb742?w=700&h=450&fit=crop" alt="Pressure gauges on compressor system" loading="lazy">
+          <span class="product-badge" style="background:var(--c-hi); color:#fff;" data-lang-th="ประหยัดพลังงาน" data-lang-en="Energy Saving">ประหยัดพลังงาน</span>
+        </div>
+        <div class="product-text">
+          <h3 data-lang-th="ปั๊มลมสกรู VSD Series (Variable Speed Drive)" data-lang-en="VSD Screw Compressor Series">ปั๊มลมสกรู VSD Series (Variable Speed Drive)</h3>
+          <p data-lang-th="เทคโนโลยี Inverter ปรับรอบตามความต้องการจริง ประหยัดพลังงานได้มากถึง 35% เมื่อเทียบกับ Fixed Speed รุ่นเดียวกัน" data-lang-en="Inverter technology adjusts motor speed to actual demand, saving up to 35% energy compared to equivalent fixed-speed models.">เทคโนโลยี Inverter ปรับรอบตามความต้องการจริง ประหยัดพลังงานได้มากถึง 35% เมื่อเทียบกับ Fixed Speed รุ่นเดียวกัน</p>
+          <div class="product-specs">
+            <span class="product-spec"><i data-lucide="zap" width="13" height="13"></i> 15 – 250 HP</span>
+            <span class="product-spec"><i data-lucide="gauge" width="13" height="13"></i> 7 – 13 bar</span>
+            <span class="product-spec"><i data-lucide="activity" width="13" height="13"></i> VSD Inverter</span>
+          </div>
+          <a href="#contact" class="btn-primary" style="font-size:0.82rem; padding: 0.75em 1.5em;">
+            <span data-lang-th="สอบถามราคา" data-lang-en="Get a Quote">สอบถามราคา</span>
+            <i data-lucide="arrow-right" width="14" height="14"></i>
+          </a>
+        </div>
+      </div>
+      <div class="product-item reveal">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1601406008343-a7211a4ea915?w=700&h=450&fit=crop" alt="Industrial compressed air tank and system" loading="lazy">
+          <span class="product-badge" style="background: rgba(168,223,192,0.2); color: var(--c-tint); border: 1px solid rgba(168,223,192,0.3);" data-lang-th="เกรดอาหาร" data-lang-en="Food Grade">เกรดอาหาร</span>
+        </div>
+        <div class="product-text">
+          <h3 data-lang-th="ปั๊มลมสกรู Oil-Free Series" data-lang-en="Oil-Free Screw Compressor Series">ปั๊มลมสกรู Oil-Free Series</h3>
+          <p data-lang-th="สำหรับอุตสาหกรรมที่ต้องการลมอัดปลอดน้ำมัน 100% อาทิ อาหารและเครื่องดื่ม ยา เวชภัณฑ์ และอิเล็กทรอนิกส์" data-lang-en="For industries requiring 100% oil-free compressed air: food &amp; beverage, pharmaceutical, medical, and electronics manufacturing.">สำหรับอุตสาหกรรมที่ต้องการลมอัดปลอดน้ำมัน 100% อาทิ อาหารและเครื่องดื่ม ยา เวชภัณฑ์ และอิเล็กทรอนิกส์</p>
+          <div class="product-specs">
+            <span class="product-spec"><i data-lucide="zap" width="13" height="13"></i> 15 – 150 HP</span>
+            <span class="product-spec"><i data-lucide="droplets" width="13" height="13"></i> Class 0</span>
+            <span class="product-spec"><i data-lucide="shield-check" width="13" height="13"></i> ISO 8573-1</span>
+          </div>
+          <a href="#contact" class="btn-primary" style="font-size:0.82rem; padding: 0.75em 1.5em;">
+            <span data-lang-th="สอบถามราคา" data-lang-en="Get a Quote">สอบถามราคา</span>
+            <i data-lucide="arrow-right" width="14" height="14"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PM SECTION -->
+<section class="pm-section" id="pm">
+  <div class="pm-inner">
+    <div class="section-label reveal" data-lang-th="บริการบำรุงรักษาเชิงป้องกัน" data-lang-en="Preventive Maintenance Service">บริการบำรุงรักษาเชิงป้องกัน</div>
+    <div class="pm-grid">
+      <div class="pm-content">
+        <h2 class="reveal d1" data-lang-th="PM ที่ดี ไม่มีวันเสีย" data-lang-en="Good PM Means No Downtime">PM ที่ดี ไม่มีวันเสีย</h2>
+        <p class="reveal d2" data-lang-th="ระบบ PM มาตรฐานของ B.T.M ออกแบบมาเพื่อป้องกันความเสียหายก่อนที่จะเกิดขึ้น ลดต้นทุนซ่อมฉุกเฉิน และยืดอายุเครื่อง" data-lang-en="B.T.M's PM standard is designed to prevent damage before it occurs, reduce emergency repair costs, and extend machine life.">ระบบ PM มาตรฐานของ B.T.M ออกแบบมาเพื่อป้องกันความเสียหายก่อนที่จะเกิดขึ้น ลดต้นทุนซ่อมฉุกเฉิน และยืดอายุเครื่อง</p>
+        <div class="pm-timeline reveal d3">
+          <div class="pm-step">
+            <div class="pm-step-num">01</div>
+            <div class="pm-step-text">
+              <h4 data-lang-th="ตรวจสอบและวินิจฉัยระบบ" data-lang-en="System Inspection & Diagnosis">ตรวจสอบและวินิจฉัยระบบ</h4>
+              <p data-lang-th="ตรวจสอบแรงดัน อุณหภูมิ กระแสไฟ และสภาพไส้กรองทุกจุด" data-lang-en="Check pressure, temperature, current draw, and filter condition at all points.">ตรวจสอบแรงดัน อุณหภูมิ กระแสไฟ และสภาพไส้กรองทุกจุด</p>
+            </div>
+          </div>
+          <div class="pm-step">
+            <div class="pm-step-num">02</div>
+            <div class="pm-step-text">
+              <h4 data-lang-th="เปลี่ยนไส้กรองและน้ำมัน" data-lang-en="Filter & Oil Change">เปลี่ยนไส้กรองและน้ำมัน</h4>
+              <p data-lang-th="ใช้อะไหล่แท้ ตามรอบที่ผู้ผลิตกำหนด รับประกันคุณภาพ" data-lang-en="Genuine parts used per manufacturer-specified intervals, quality guaranteed.">ใช้อะไหล่แท้ ตามรอบที่ผู้ผลิตกำหนด รับประกันคุณภาพ</p>
+            </div>
+          </div>
+          <div class="pm-step">
+            <div class="pm-step-num">03</div>
+            <div class="pm-step-text">
+              <h4 data-lang-th="ทำความสะอาดและปรับแต่ง" data-lang-en="Cleaning & Calibration">ทำความสะอาดและปรับแต่ง</h4>
+              <p data-lang-th="ทำความสะอาด Cooler ปรับ Unload Pressure และ Cut-in/Cut-out" data-lang-en="Clean coolers, adjust unload pressure, and calibrate cut-in/cut-out settings.">ทำความสะอาด Cooler ปรับ Unload Pressure และ Cut-in/Cut-out</p>
+            </div>
+          </div>
+          <div class="pm-step">
+            <div class="pm-step-num">04</div>
+            <div class="pm-step-text">
+              <h4 data-lang-th="รายงานและคำแนะนำ" data-lang-en="Report & Recommendations">รายงานและคำแนะนำ</h4>
+              <p data-lang-th="ส่งรายงาน PM พร้อมภาพถ่ายและคำแนะนำการดูแลระหว่างงวด" data-lang-en="Deliver PM report with photos and interim care recommendations.">ส่งรายงาน PM พร้อมภาพถ่ายและคำแนะนำการดูแลระหว่างงวด</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pm-img reveal-right">
+        <img src="https://images.unsplash.com/photo-1580835919673-429540898832?w=700&h=560&fit=crop" alt="Engineer performing compressor maintenance" loading="lazy">
+        <div class="pm-img-caption" data-lang-th="ทีมช่างเทคนิคของ B.T.M ดำเนินการ PM ตามมาตรฐานสากล" data-lang-en="B.T.M technicians performing PM to international standards.">ทีมช่างเทคนิคของ B.T.M ดำเนินการ PM ตามมาตรฐานสากล</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULLQUOTE 2 -->
+<div class="pullquote-2">
+  <blockquote>
+    <span data-lang-th="&ldquo;การบำรุงรักษาที่ดี คือการลงทุนที่คุ้มค่าที่สุด สำหรับเครื่องจักรทุกเครื่อง&rdquo;" data-lang-en="&ldquo;Good maintenance is the best investment you can make for any piece of machinery.&rdquo;">&ldquo;การบำรุงรักษาที่ดี คือการลงทุนที่คุ้มค่าที่สุด สำหรับเครื่องจักรทุกเครื่อง&rdquo;</span>
+    <cite data-lang-th="— หลักการดูแลปั๊มลม B.T.M Enterprise" data-lang-en="— B.T.M Enterprise Compressor Care Principle">— หลักการดูแลปั๊มลม B.T.M Enterprise</cite>
+  </blockquote>
+</div>
+
+<!-- WHY BTM -->
+<section class="why-btm" id="why">
+  <div class="why-inner">
+    <div class="why-header">
+      <div class="section-label reveal" data-lang-th="ทำไมต้องเลือก B.T.M" data-lang-en="Why Choose B.T.M">ทำไมต้องเลือก B.T.M</div>
+      <h2 class="reveal d1" data-lang-th="ความแตกต่างที่คุณรู้สึกได้" data-lang-en="A Difference You Can Feel">ความแตกต่างที่คุณรู้สึกได้</h2>
+      <p class="reveal d2" data-lang-th="ไม่ใช่แค่ผู้ขาย แต่เราเป็นพาร์ทเนอร์ระยะยาวที่เข้าใจความต้องการของโรงงานคุณ" data-lang-en="Not just a vendor — a long-term partner who understands your factory's needs.">ไม่ใช่แค่ผู้ขาย แต่เราเป็นพาร์ทเนอร์ระยะยาวที่เข้าใจความต้องการของโรงงานคุณ</p>
+    </div>
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-icon-wrap"><i data-lucide="shield-check" width="20" height="20"></i></div>
+        <div class="why-body">
+          <h3 data-lang-th="อะไหล่แท้ รับประกันคุณภาพ" data-lang-en="Genuine Parts, Quality Guaranteed">อะไหล่แท้ รับประกันคุณภาพ</h3>
+          <p data-lang-th="เราจัดหาอะไหล่จากผู้ผลิตต้นทางโดยตรง ไม่มีของปลอม ไม่มีของเกรดต่ำ เพื่อให้เครื่องของคุณทำงานได้อย่างเต็มประสิทธิภาพ" data-lang-en="We source parts directly from original manufacturers. No counterfeits, no substandard grades — so your machine runs at full performance.">เราจัดหาอะไหล่จากผู้ผลิตต้นทางโดยตรง ไม่มีของปลอม ไม่มีของเกรดต่ำ เพื่อให้เครื่องของคุณทำงานได้อย่างเต็มประสิทธิภาพ</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap"><i data-lucide="clock" width="20" height="20"></i></div>
+        <div class="why-body">
+          <h3 data-lang-th="ตอบสนองรวดเร็ว ลดเวลา Downtime" data-lang-en="Fast Response, Minimal Downtime">ตอบสนองรวดเร็ว ลดเวลา Downtime</h3>
+          <p data-lang-th="ทีมช่างของเราพร้อมออกงานภายใน 4 ชั่วโมงสำหรับลูกค้าสัญญา ลดผลกระทบต่อการผลิตให้น้อยที่สุด" data-lang-en="Our technicians deploy within 4 hours for contract clients, minimizing the impact on your production line.">ทีมช่างของเราพร้อมออกงานภายใน 4 ชั่วโมงสำหรับลูกค้าสัญญา ลดผลกระทบต่อการผลิตให้น้อยที่สุด</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap"><i data-lucide="users" width="20" height="20"></i></div>
+        <div class="why-body">
+          <h3 data-lang-th="ช่างผู้เชี่ยวชาญที่ผ่านการอบรม" data-lang-en="Trained & Certified Technicians">ช่างผู้เชี่ยวชาญที่ผ่านการอบรม</h3>
+          <p data-lang-th="ทีมช่างทุกคนผ่านการฝึกอบรมจากผู้ผลิตและมีประสบการณ์ตรงในการดูแลปั๊มลมสกรูหลากหลายยี่ห้อ" data-lang-en="Every technician is manufacturer-trained with direct experience across multiple screw compressor brands.">ทีมช่างทุกคนผ่านการฝึกอบรมจากผู้ผลิตและมีประสบการณ์ตรงในการดูแลปั๊มลมสกรูหลากหลายยี่ห้อ</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap"><i data-lucide="file-text" width="20" height="20"></i></div>
+        <div class="why-body">
+          <h3 data-lang-th="ใบเสนอราคาโปร่งใส ไม่มีค่าใช้จ่ายซ่อน" data-lang-en="Transparent Pricing, No Hidden Costs">ใบเสนอราคาโปร่งใส ไม่มีค่าใช้จ่ายซ่อน</h3>
+          <p data-lang-th="ทุกงานมีใบเสนอราคาชัดเจน อธิบายรายการทุกชิ้น ไม่มีค่าใช้จ่ายแอบแฝง ลูกค้าตัดสินใจได้อย่างมั่นใจ" data-lang-en="Every job comes with a detailed quote itemizing every part — no hidden charges, so clients can decide with confidence.">ทุกงานมีใบเสนอราคาชัดเจน อธิบายรายการทุกชิ้น ไม่มีค่าใช้จ่ายแอบแฝง ลูกค้าตัดสินใจได้อย่างมั่นใจ</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap"><i data-lucide="map-pin" width="20" height="20"></i></div>
+        <div class="why-body">
+          <h3 data-lang-th="ครอบคลุมทั่วประเทศ" data-lang-en="Nationwide Coverage">ครอบคลุมทั่วประเทศ</h3>
+          <p data-lang-th="ให้บริการลูกค้าทั่วประเทศไทย ทั้งในกรุงเทพ นิคมอุตสาหกรรม และต่างจังหวัด ด้วยทีมช่างประจำภูมิภาค" data-lang-en="Serving clients nationwide — Bangkok, industrial estates, and provincial factories — with regional technician teams.">ให้บริการลูกค้าทั่วประเทศไทย ทั้งในกรุงเทพ นิคมอุตสาหกรรม และต่างจังหวัด ด้วยทีมช่างประจำภูมิภาค</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-text">
+      <div class="section-label reveal" data-lang-th="พร้อมให้บริการคุณ" data-lang-en="Ready to Serve You">พร้อมให้บริการคุณ</div>
+      <h2 class="reveal d1" data-lang-th="ติดต่อเราวันนี้" data-lang-en="Contact Us Today">ติดต่อเราวันนี้</h2>
+      <p class="reveal d2" data-lang-th="ให้ B.T.M Enterprise เป็นพาร์ทเนอร์ดูแลระบบลมอัดของโรงงานคุณ ปรึกษาฟรี ไม่มีค่าใช้จ่าย" data-lang-en="Let B.T.M Enterprise be your compressed air system partner. Free consultation, no obligation.">ให้ B.T.M Enterprise เป็นพาร์ทเนอร์ดูแลระบบลมอัดของโรงงานคุณ ปรึกษาฟรี ไม่มีค่าใช้จ่าย</p>
+      <div class="contact-info reveal d3">
+        <div class="contact-info-item">
+          <i data-lucide="phone" width="18" height="18"></i>
+          <div class="contact-info-text">
+            <div class="label" data-lang-th="โทรศัพท์" data-lang-en="Phone">โทรศัพท์</div>
+            <div class="value">+66 8X-XXX-XXXX</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <i data-lucide="mail" width="18" height="18"></i>
+          <div class="contact-info-text">
+            <div class="label" data-lang-th="อีเมล" data-lang-en="Email">อีเมล</div>
+            <div class="value">info@btmenterprise.th</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <i data-lucide="map-pin" width="18" height="18"></i>
+          <div class="contact-info-text">
+            <div class="label" data-lang-th="ที่อยู่" data-lang-en="Address">ที่อยู่</div>
+            <div class="value" data-lang-th="กรุงเทพมหานคร ประเทศไทย" data-lang-en="Bangkok, Thailand">กรุงเทพมหานคร ประเทศไทย</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <i data-lucide="clock" width="18" height="18"></i>
+          <div class="contact-info-text">
+            <div class="label" data-lang-th="เวลาทำการ" data-lang-en="Hours">เวลาทำการ</div>
+            <div class="value" data-lang-th="จันทร์–เสาร์ 08:00 – 18:00 น." data-lang-en="Mon–Sat 08:00 – 18:00">จันทร์–เสาร์ 08:00 – 18:00 น.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal d2" onsubmit="return false;">
+      <div class="form-group">
+        <label data-lang-th="ชื่อ – นามสกุล" data-lang-en="Full Name">ชื่อ – นามสกุล</label>
+        <input type="text" data-lang-th="กรุณากรอกชื่อของคุณ" data-lang-en="Your full name" placeholder="กรุณากรอกชื่อของคุณ">
+      </div>
+      <div class="form-group">
+        <label data-lang-th="เบอร์โทรศัพท์" data-lang-en="Phone Number">เบอร์โทรศัพท์</label>
+        <input type="tel" data-lang-th="เบอร์โทรที่สามารถติดต่อได้" data-lang-en="Your contact number" placeholder="เบอร์โทรที่สามารถติดต่อได้">
+      </div>
+      <div class="form-group">
+        <label data-lang-th="ประเภทบริการที่ต้องการ" data-lang-en="Service Required">ประเภทบริการที่ต้องการ</label>
+        <select>
+          <option value="" data-lang-th="กรุณาเลือก" data-lang-en="Please select">กรุณาเลือก</option>
+          <option value="sale" data-lang-th="ซื้อปั๊มลมสกรู" data-lang-en="Purchase Compressor">ซื้อปั๊มลมสกรู</option>
+          <option value="pm" data-lang-th="บริการ PM" data-lang-en="PM Service">บริการ PM</option>
+          <option value="repair" data-lang-th="ซ่อมปั๊มลม" data-lang-en="Repair">ซ่อมปั๊มลม</option>
+          <option value="parts" data-lang-th="สั่งซื้ออะไหล่" data-lang-en="Spare Parts Order">สั่งซื้ออะไหล่</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-lang-th="รายละเอียดเพิ่มเติม" data-lang-en="Additional Details">รายละเอียดเพิ่มเติม</label>
+        <textarea data-lang-th="อธิบายความต้องการหรืออาการเสียของเครื่อง" data-lang-en="Describe your needs or the fault symptom" placeholder="อธิบายความต้องการหรืออาการเสียของเครื่อง"></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="align-self:flex-start; border:none; cursor:pointer;">
+        <i data-lucide="send" width="16" height="16"></i>
+        <span data-lang-th="ส่งข้อความ" data-lang-en="Send Message">ส่งข้อความ</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-text">B<span>.</span>T<span>.</span>M<span>.</span> Enterprise</div>
+      <p data-lang-th="ผู้เชี่ยวชาญปั๊มลมสกรู อะไหล่ และบริการซ่อมบำรุงครบวงจร" data-lang-en="Specialist in screw compressors, spare parts, and complete maintenance services.">ผู้เชี่ยวชาญปั๊มลมสกรู อะไหล่ และบริการซ่อมบำรุงครบวงจร</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang-th="บริการ" data-lang-en="Services">บริการ</h4>
+      <ul>
+        <li><a href="#services" data-lang-th="จำหน่ายปั๊มลมสกรู" data-lang-en="Compressor Sales">จำหน่ายปั๊มลมสกรู</a></li>
+        <li><a href="#services" data-lang-th="จำหน่ายอะไหล่แท้" data-lang-en="Genuine Parts">จำหน่ายอะไหล่แท้</a></li>
+        <li><a href="#pm" data-lang-th="บริการ PM" data-lang-en="PM Service">บริการ PM</a></li>
+        <li><a href="#services" data-lang-th="ซ่อมปั๊มลมสกรู" data-lang-en="Compressor Repair">ซ่อมปั๊มลมสกรู</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-lang-th="ติดต่อ" data-lang-en="Contact">ติดต่อ</h4>
+      <ul>
+        <li><a href="tel:+668XXXXXXXX">+66 8X-XXX-XXXX</a></li>
+        <li><a href="mailto:info@btmenterprise.th">info@btmenterprise.th</a></li>
+        <li><a href="#contact" data-lang-th="แบบฟอร์มติดต่อ" data-lang-en="Contact Form">แบบฟอร์มติดต่อ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-lang-th="&copy; 2024 B.T.M Enterprise. สงวนลิขสิทธิ์" data-lang-en="&copy; 2024 B.T.M Enterprise. All rights reserved.">&copy; 2024 B.T.M Enterprise. สงวนลิขสิทธิ์</p>
+    <div class="lang-sw" style="font-size:0.72rem;">
+      <i data-lucide="globe" width="12" height="12"></i>
+      <span class="lang-sw__label">TH</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== NAVBAR SCROLL =====
+(function(){
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 60){ nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+  }, { passive: true });
+})();
+
+// ===== HAMBURGER / MOBILE MENU =====
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+})();
+
+// ===== SCROLL REVEAL =====
+(function(){
+  var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .why-item');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+
+// ===== SIDEBAR NAV ACTIVE =====
+(function(){
+  var sections = ['hero','about','services','products','pm','contact'];
+  var links = document.querySelectorAll('.sidebar-nav a');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        var active = document.querySelector('.sidebar-nav a[data-section="'+e.target.id+'"]');
+        if(active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) obs.observe(el);
+  });
+})();
+
+// ===== LANG SWITCHER =====
+(function(){var K='site-lang',L=localStorage.getItem(K)||'th';function S(l){L=l;localStorage.setItem(K,l);document.documentElement.lang=l;document.querySelectorAll('[data-lang-th]').forEach(function(e){var t=e.getAttribute('data-lang-'+l);if(t!==null){e.textContent=t}});var lb=document.querySelector('.lang-sw__label');if(lb){lb.textContent=l.toUpperCase()}var lbs=document.querySelectorAll('.lang-sw__label');lbs.forEach(function(lb){lb.textContent=l.toUpperCase()})}var sws=document.querySelectorAll('.lang-sw');sws.forEach(function(sw){sw.addEventListener('click',function(){S(L==='th'?'en':'th')});sw.style.cursor='pointer'});if(L!=='th'){S(L)}})();
+</script>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
